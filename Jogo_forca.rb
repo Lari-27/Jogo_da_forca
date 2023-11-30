@@ -4,12 +4,11 @@ class JogoDaForca
         @letras_corretas = []
         @letras_erradas = []
         @max_tentativas = 10
-end
+    end
 
     def escolher_palavra
-        palavras = ["ruby", "python", "javascript", "java", "csharp"]
-        palavras.sample
-end
+        palavras = File.readlines("palavras.txt").sample.chomp.downcase
+    end
 
     def exibir_palavra_mascarada
         mascarada = @palavra.chars.map do |letra|
@@ -17,15 +16,15 @@ end
             letra
         else
             "_"
+        end
     end
-end
         mascarada.join(" ")
-end
+    end
 
     def exibir_tentativas
         puts "Letras corretas: #{@letras_corretas.join(', ')}"
         puts "Letras erradas: #{@letras_erradas.join(', ')}"
-end
+    end
 
     def jogar
         while true
@@ -67,7 +66,7 @@ end
 
     def ganhou?
         (@palavra.chars - @letras_corretas).empty?
-end
+    end
 
     def perdeu?
         @letras_erradas.length >= @max_tentativas
